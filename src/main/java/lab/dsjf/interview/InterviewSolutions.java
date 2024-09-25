@@ -9,7 +9,7 @@ public class InterviewSolutions implements Interview {
 
     @Override
     public <A, B> List<B> map(List<A> xs, Function<A, B> f) {
-        if (xs.stream().findFirst().isEmpty()) {
+        if (xs.isEmpty()) {
             return List.of();
         } else {
             return Stream.concat(
@@ -21,7 +21,7 @@ public class InterviewSolutions implements Interview {
 
     @Override
     public <A> List<A> filter(List<A> xs, Function<A, Boolean> f) {
-        if (xs.stream().findFirst().isEmpty()) {
+        if (xs.isEmpty()) {
             return List.of();
         } else {
             A first = xs.getFirst();
@@ -34,7 +34,7 @@ public class InterviewSolutions implements Interview {
 
     @Override
     public <A, B> B reduce(List<A> xs, BiFunction<A, B, B> f, B accumulator) {
-        if (xs.stream().findFirst().isEmpty()) {
+        if (xs.isEmpty()) {
             return accumulator;
         } else {
             return reduce(xs.subList(1, xs.size()), f, f.apply(xs.getFirst(), accumulator));
