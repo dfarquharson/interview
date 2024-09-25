@@ -37,8 +37,7 @@ public class InterviewSolutions implements Interview {
         if (xs.stream().findFirst().isEmpty()) {
             return accumulator;
         } else {
-            A first = xs.getFirst();
-            return reduce(xs.subList(1, xs.size()), f, f.apply(first, accumulator));
+            return reduce(xs.subList(1, xs.size()), f, f.apply(xs.getFirst(), accumulator));
         }
     }
 
