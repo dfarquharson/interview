@@ -1,0 +1,35 @@
+plugins {
+    id 'java'
+}
+
+group = 'lab.dsjf'
+version = '0.0.1'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testImplementation(platform('org.junit:junit-bom:5.10.0'))
+    testImplementation('org.junit.jupiter:junit-jupiter')
+    testImplementation('org.assertj:assertj-core:3.25.1')
+}
+
+test {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+    }
+    afterSuite { desc, result ->
+        if (!desc.parent) { // outermost suite
+            println() // gives us some breathing room from the last individual test result
+            println("Test Suite Result:")
+            println("  Total  : ${result.testCount}")
+            println("  Passed : ${result.successfulTestCount}")
+            println("  Failed : ${result.failedTestCount}")
+            println("  Skipped: ${result.skippedTestCount}")
+            println("  Overall Result: ${result.resultType}")
+        }
+    }
+}
