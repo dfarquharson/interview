@@ -24,9 +24,9 @@ public class InterviewSolutions implements Interview {
         if (xs.isEmpty()) {
             return List.of();
         } else {
-            A first = xs.getFirst();
             return Stream.concat(
-                    f.apply(first) ? Stream.of(first) : Stream.<A>of(),
+                    ((Function<A, Stream<A>>) first -> f.apply(first) ? Stream.of(first) : Stream.<A>of())
+                            .apply(xs.getFirst()),
                     filter(xs.subList(1, xs.size()), f).stream()
             ).toList();
         }
